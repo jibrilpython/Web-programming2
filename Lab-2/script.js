@@ -1,4 +1,4 @@
-// Strict mode for clean code
+// Strict mode( for clean code)
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -241,30 +241,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startEditTask(itemElement, task) {
-        // Удаляем старые элементы и добавляем новые поля ввода
+        // deleting the old elements and adding new ones
         itemElement.classList.add('todo-item--editing');
         const contentContainer = itemElement.querySelector('.todo-item__content');
         const actionsDiv = itemElement.querySelector('.todo-item__actions');
 
-        // Очищаем и заменяем
         contentContainer.innerHTML = '';
         actionsDiv.innerHTML = '';
         
-        // Поле ввода текста
+        // text entry
         const editInput = createDomElement('input', 'todo-item__edit-input', null, {
             type: 'text',
             value: task.text
         });
         contentContainer.appendChild(editInput);
         
-        // Поле ввода даты
+        // date entry
         const editDate = createDomElement('input', 'todo-item__edit-date', null, {
             type: 'date',
             value: task.date 
         });
         contentContainer.appendChild(editDate);
 
-        // Кнопка сохранения
+        // save button
         const saveButton = createDomElement('button', 'action-btn action-btn--edit', 'Сохранить', { 'data-action': 'save' });
         actionsDiv.appendChild(saveButton);
     }
@@ -278,13 +277,13 @@ document.addEventListener('DOMContentLoaded', () => {
             task.text = editInput.value.trim();
             task.date = editDate.value;
             saveTasks();
-            renderTasks(); // Перерисовываем весь список
+            renderTasks(); 
         } else {
             alert('Текст задачи не может быть пустым!');
         }
     }
 
-    // === 7. Логика Drag-and-Drop (2 балла) ===
+    // Drag and drop
     
     function handleDragStart(e) {
         draggedItem = this; // 'this' ссылается на li.todo-item
@@ -295,17 +294,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleDragEnd(e) {
         this.classList.remove('dragging');
-        // Очистка всех классов drag-over после завершения
+        
         document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
         draggedItem = null;
     }
 
     function handleDragOver(e) {
-        e.preventDefault(); // Разрешает бросание
+        e.preventDefault(); 
         if (this.nodeType === 1 && this !== draggedItem) {
-            // Добавляем визуальный индикатор, куда будет вставлен элемент
+
             if (!this.classList.contains('drag-over')) {
-                // Убираем со всех остальных элементов
+
                 document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
                 this.classList.add('drag-over');
             }

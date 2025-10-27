@@ -19,11 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
             tasks = JSON.parse(storedTasks);
         } else {
             // initial task
-            tasks = [
-                { id: Date.now() + 1, text: 'Drag-and-Drop', completed: false, date: '2025-12-10' },
-                { id: Date.now() + 2, text: 'Адаптивность макета', completed: true, date: '2025-12-05' },
-                { id: Date.now() + 3, text: 'Сортировка по дате', completed: false, date: '2025-11-30' }
-            ];
+            // tasks = [
+            //     { id: Date.now() + 1, text: 'Drag-and-Drop', completed: false, date: '2025-12-10' },
+            //     { id: Date.now() + 2, text: 'Адаптивность макета', completed: true, date: '2025-12-05' },
+            //     { id: Date.now() + 3, text: 'Сортировка по дате', completed: false, date: '2025-11-30' }
+            // ];
         }
     }
 

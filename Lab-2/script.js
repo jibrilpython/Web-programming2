@@ -1,4 +1,4 @@
-// Strict mode( for clean code)
+// Strict mode for clean code
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -322,33 +322,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const droppedItemId = parseInt(e.dataTransfer.getData('text/plain'));
         const targetItemId = parseInt(this.getAttribute('data-id'));
 
-        // Находим индексы в исходном массиве задач (tasks)
+        // finding text from list
         const droppedIndex = tasks.findIndex(t => t.id === droppedItemId);
         const targetIndex = tasks.findIndex(t => t.id === targetItemId);
 
-        // Перемещаем элемент в массиве
         if (droppedIndex !== -1 && targetIndex !== -1) {
             const [movedTask] = tasks.splice(droppedIndex, 1);
             tasks.splice(targetIndex, 0, movedTask);
             
             saveTasks();
             
-            // NOTE: RenderTasks здесь не вызывается, т.к. D&D работает только с текущим 
-            // отфильтрованным/отсортированным списком на экране.
-            // Для сохранения порядка достаточно просто обновить DOM.
+            // NOTE: RenderTasks is not called here, as D&D only works with the current pne 
+            // filtered/sorted list on the screen
+             // To maintain order, simply update the DOM.
             const todoList = document.getElementById('todo-list');
             
             if (droppedIndex < targetIndex) {
-                 // Перемещаем ниже: вставляем после целевого элемента
+
                 todoList.insertBefore(draggedItem, this.nextSibling);
             } else {
-                 // Перемещаем выше: вставляем перед целевым элементом
+
                 todoList.insertBefore(draggedItem, this);
             }
         }
     }
 
-    // === 8. Установка слушателей событий ===
+    // event listeners
 
     function setupEventListeners() {
         const todoList = document.getElementById('todo-list');
@@ -357,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sortSelect = document.getElementById('sort-select');
         const searchInput = document.getElementById('search-input');
         
-        // 8.1. Отправка формы (Добавление задачи)
+        // Form Submission (Add task)
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const textInput = document.getElementById('new-task-text');
@@ -368,26 +367,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (text && date) {
                 addTask(text, date);
-                textInput.value = ''; // Очистка поля
-                dateInput.value = new Date().toISOString().split('T')[0]; // Сброс даты
+                textInput.value = ''; // clearing the field 
+                dateInput.value = new Date().toISOString().split('T')[0]; // to reset the date
             }
         });
 
-        // 8.2. Изменение состояния и действий (Удаление, Редактирование, Выполнено)
-        todoList.addEventListener('click', (e) => {
+        // State Change and Actions (Delete, Edit, Complete)
             const itemElement = e.target.closest('.todo-item');
             if (!itemElement) return;
 
             const id = parseInt(itemElement.getAttribute('data-id'));
             const task = tasks.find(t => t.id === id);
 
-            // Клик по чекбоксу
+            // clicking the check box
             if (e.target.classList.contains('todo-item__checkbox')) {
                 toggleComplete(id);
                 return;
             }
 
-            // Клик по кнопкам действий
+            // clickk on action buttons 
             const action = e.target.getAttribute('data-action');
             if (action) {
                 switch (action) {
@@ -406,25 +404,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // 8.3. Фильтрация
+        // filtering 
         filterSelect.addEventListener('change', (e) => {
             currentFilter = e.target.value;
             renderTasks();
         });
 
-        // 8.4. Сортировка
+        // sorting 
         sortSelect.addEventListener('change', (e) => {
             currentSort = e.target.value;
             renderTasks();
         });
         
-        // 8.5. Поиск (По названию)
+        // searching by name 
         searchInput.addEventListener('input', (e) => {
             currentSearch = e.target.value;
             renderTasks();
         });
 
-        // 8.6. Drag-and-Drop слушатели
+        // drag and drop listeners
         todoList.addEventListener('dragstart', (e) => {
             if (e.target.classList.contains('todo-item')) {
                 handleDragStart.call(e.target, e);
@@ -458,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === Инициализация ===
+
     loadTasks();
     renderAppStructure();
 });

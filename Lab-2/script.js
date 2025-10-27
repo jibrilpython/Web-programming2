@@ -373,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // State Change and Actions (Delete, Edit, Complete)
+        todoList.addEventListener('click', (e) => {
             const itemElement = e.target.closest('.todo-item');
             if (!itemElement) return;
 

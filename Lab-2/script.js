@@ -189,15 +189,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const checkLabel = createDomElement('label', 'todo-item__check-label', null, { for: checkboxId });
             contentContainer.appendChild(checkLabel);
             
-            // Текст задачи
+            //Text
             const textSpan = createDomElement('span', 'todo-item__text', task.text);
             contentContainer.appendChild(textSpan);
 
-            // Дата
+            // Date
             const dateSpan = createDomElement('span', 'todo-item__date', `Срок: ${task.date}`);
             contentContainer.appendChild(dateSpan);
 
-            // Кнопки действий
+            // action buttons
             const actionsDiv = createDomElement('div', 'todo-item__actions');
             listItem.appendChild(actionsDiv);
             
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Обработчики логики (CRUD)
+    // CRUD
 
     function addTask(text, date) {
         const newTask = {
@@ -463,4 +463,3 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTasks();
     renderAppStructure();
 });
-
